@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+.ltt{
+	height:200px;
+}
+</style>
+</head>
+<script type="text/javascript">
+
+function myclick(){
+	let b = [];
+	for(let i=0; i<45; i++){
+		b[i] = i+1
+	}
+	for(let k=0; k<1000; k++){
+		rnd = parseInt(Math.random()*45);
+		a1 = b[0];
+		b[0] = b[rnd]
+		b[rnd] = a1;
+	}
+	let ltt = document.querySelectorAll('.ltt');
+	ltt[0].innerText = b[0];
+	ltt[1].innerText = b[1];
+	ltt[2].innerText = b[2];
+	ltt[3].innerText = b[3];
+	ltt[4].innerText = b[4];
+	ltt[5].innerText = b[5];
+}
+</script>
+<body>
+EX04<br>
+<table border="1">
+	<tr>
+		<td><span class="ltt"></span></td>
+		<td><span class="ltt"></span></td>
+		<td><span class="ltt"></span></td>
+		<td><span class="ltt"></span></td>
+		<td><span class="ltt"></span></td>
+		<td><span class="ltt"></span></td>
+	</tr>
+	<tr>
+		<td colspan="6">
+			<input type="button" value="로또생성" onclick="myclick()" />
+		</td>
+	</tr>
+</table>
+</body>
+</html>

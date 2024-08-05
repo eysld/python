@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script src="jquery-3.7.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+
+function myclick(){
+	var param = {
+		'menu' : '짬뽕'
+	}
+    axios.post("/axios",param).then((res) => {
+        console.log(res);
+    });
+}
+
+
+</script>
+<body>
+EX01<br>
+<span id="my_span">Good Morning</span>
+<input type="button" value="click" id="btn" onclick="myclick()">
+</body>
+</html>

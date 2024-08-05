@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script src="jquery-3.7.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+
+function fn_list(){
+    axios.post("/emp_list").then((res) => {
+    	var obj = document.querySelector('#my_tbody');
+    	var list = res.data.list;
+    	
+    	var txt = "";
+    	for(let i=0; i<list.length; i++){
+    		
+    	txt += `
+    		<tr>
+				<td><a href="javascript:fn_one('${list[i].e_id}')">${list[i].e_id}</a></td>
+				<td>${list[i].e_name}</td>
+				<td>${list[i].gen}</td>
+				<td>${list[i].addr}</td>
+			</tr>
+    	`;
+    	}
+    	obj.innerHTML = txt;
+    });
+}
+
+function fn_one(e_id){
+	console.log("e_id", e_id);
+	
+	axios.post("/emp_one", {e_id}).then((res) => {
+		var vo = res.data.vo;
+		var obj_e_id = document.querySelector('#e_id');
+		var obj_e_name = document.querySelector('#e_name');
+		var obj_gen = document.querySelector('#gen');
+		var obj_addr = document.querySelector('#addr');
+    	
+		obj_e_id.value = vo.e_id;
+		obj_e_name.value = vo.e_name;
+		obj_gen.value = vo.gen;
+		obj_addr.value = vo.addr;
+    });
+}
+function fn_add(){
+	var obj_e_id = document.querySelector('#e_id');
+	var obj_e_name = document.querySelector('#e_name');
+	var obj_gen = document.querySelector('#gen');
+	var obj_addr = document.querySelector('#addr');
+	
+	var param = {
+			'e_id' : obj_e_id.value,
+			'e_name' : obj_e_name.value,
+			'gen' : obj_gen.value,
+			'addr' : obj_addr.value
+	}
+	console.log(param)
+	axios.post("/emp_add", param).then((res) => {
+		var cnt = res.data.cnt;
+		if(cnt == 1){
+			alert("추가 완료");
+			fn_list();
+			obj_e_id.value="";
+			obj_e_name.value="";
+			obj_gen.value="";
+			obj_addr.value="";
+		}else{
+			alert("문제 발생");
+		}
+    });
+	fn_list()
+}
+function fn_mod(){
+	var obj_e_id = document.querySelector('#e_id');
+	var obj_e_name = document.querySelector('#e_name');
+	var obj_gen = document.querySelector('#gen');
+	var obj_addr = document.querySelector('#addr');
+	
+	var param = {
+			'e_id' : obj_e_id.value,
+			'e_name' : obj_e_name.value,
+			'gen' : obj_gen.value,
+			'addr' : obj_addr.value
+	}
+	console.log(param)
+	axios.post("/emp_mod", param).then((res) => {
+		var cnt = res.data.cnt;
+		if(cnt == 1){
+			alert("수정 완료");
+			fn_list();
+			obj_e_id.value="";
+			obj_e_name.value="";
+			obj_gen.value="";
+			obj_addr.value="";
+		}else{
+			alert("문제 발생");
+		}
+    });
+}
+function fn_mod(){
+	var obj_e_id = document.querySelector('#e_id');
+	var obj_e_name = document.querySelector('#e_name');
+	var obj_gen = document.querySelector('#gen');
+	var obj_addr = document.querySelector('#addr');
+	
+	var param = {
+			'e_id' : obj_e_id.value,
+			'e_name' : obj_e_name.value,
+			'gen' : obj_gen.value,
+			'addr' : obj_addr.value
+	}
+	console.log(param)
+	axios.post("/emp_mod", param).then((res) => {
+		var cnt = res.data.cnt;
+		if(cnt == 1){
+			alert("수정 완료");
+			fn_list();
+			obj_e_id.value="";
+			obj_e_name.value="";
+			obj_gen.value="";
+			obj_addr.value="";
+		}else{
+			alert("문제 발생");
+		}
+    });
+}
+function fn_del(){
+	var obj_e_id = document.querySelector('#e_id');
+	var obj_e_name = document.querySelector('#e_name');
+	var obj_gen = document.querySelector('#gen');
+	var obj_addr = document.querySelector('#addr');
+	var param = {
+		'e_id' : obj_e_id.value,
+	}
+	console.log(param)
+	axios.post("/emp_del", param).then((res) => {
+		var cnt = res.data.cnt;
+		if(cnt == 1){
+			alert("삭제 완료");
+			fn_list();
+			obj_e_id.value="";
+			obj_e_name.value="";
+			obj_gen.value="";
+			obj_addr.value="";
+		}else{
+			alert("문제 발생");
+		}
+    });
+}
+
+</script>
+<body onload="fn_list()">
+EMP<br>
+<table border="1">
+	<thead>
+		<tr>
+			<td>사번</td>
+			<td>이름</td>
+			<td>성별</td>
+			<td>주소</td>
+		</tr>
+	</thead>  
+	<tbody id="my_tbody">
+		<tr>
+			<td colspan="4">검색된 데이터가 없습니다.</td>
+		</tr>
+	</tbody> 
+</table>
+<table border="1">
+	<tr>
+		<td>사번</td>
+		<td>
+			<input type="text" id="e_id">
+		</td>
+	</tr>
+	<tr>
+		<td>이름</td>
+		<td>
+			<input type="text" id="e_name">
+		</td>
+	</tr>
+	<tr>
+		<td>성별</td>
+		<td>
+			<input type="text" id="gen">
+		</td>
+	</tr>
+	<tr>
+		<td>주소</td>
+		<td>
+			<input type="text" id="addr">
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<input type="button" value="추가" onclick="fn_add()"/>
+			<input type="button" value="수정" onclick="fn_mod()"/>
+			<input type="button" value="삭제" onclick="fn_del()"/>
+		</td>
+	</tr>
+</table>
+</body>
+</html>

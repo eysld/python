@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+function myclick(){
+	let it = document.querySelector('.it');
+	let val = it.value;
+	val = val*2;
+	console.log(val);
+	it.value = val;
+}
+</script>
+</head>
+<body>
+EX02<br>
+<input class="it" type="text" value="100">
+<input type="button" value="DOUBLE" onclick="myclick()">
+</body>
+</html>

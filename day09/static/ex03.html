@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+#sb_dan{
+	width: 30px
+}
+#mydiv{
+	height : 200px;
+}
+
+</style>
+</head>
+<script type="text/javascript">
+function myclick(){
+	let val = document.querySelector('#sb_dan').value;
+	let val2 = parseInt(val);
+	let str = "";
+	for(let i=1; i<10; i++){
+		str += `${val2}x${i}=${val2*i}`+"\n";
+	}
+	let div = document.querySelector('#mydiv');
+	div.innerText = str;
+}
+</script>
+<body>
+EX03<br>
+<table border="1">
+	<tr>
+		<td>출력단수</td>
+		<td>
+			<select id="sb_dan">
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<input type="button" value="출력하기" onclick="myclick()"/>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<div id="mydiv"></div>
+		</td>
+	</tr>
+</table>
+</body>
+</html>

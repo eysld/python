@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script src="jquery-3.7.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+function fn_sync(){
+	var a = 1;
+	var b = 2;
+	var sum = a + b;
+	
+	console.log("sum", sum);
+}
+function fn_async(){
+	var a = 0;
+	var b = 0;
+	$.ajax({
+        type: 'POST',
+        url: '/get1',
+        async : false,
+        dataType : 'JSON',
+        contentType: "application/json",
+        success: function(resp){
+        	console.log(resp.num)
+        	a = resp.num;
+        }
+    })
+	$.ajax({
+        type: 'POST',
+        url: '/get2',
+        async : false,
+        dataType : 'JSON',
+        contentType: "application/json",
+        success: function(resp){
+        	console.log(resp.num)
+        	b = resp.num;
+        }
+    })
+    var sum = a + b;
+	console.log('sum', sum);
+}
+</script>
+<body>
+ASYNC<br>
+<a href="javascript:fn_sync()">sync</a><br>
+<a href="javascript:fn_async()">async</a><br>
+</body>
+</html>
